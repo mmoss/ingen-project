@@ -1,0 +1,7 @@
+.DS_Store
+coverage
+temp
+jspm_packages
+node_modules
+npm-debug.log
+reports

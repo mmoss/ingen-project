@@ -1,0 +1,95 @@
+# Voiceover script
+generic:
+  welcome:
+    island:
+      vo: "Welcome to Island Foobl-are!"
+      text: "Welcome to Island Fooblar!"
+  intro:
+    tablet:
+      vo: "You can drag the screen to move around and explore. Touch things to learn more about animals and plants that liv here!"
+      text: "You can drag the screen to move around and explore. Touch things to learn more about animals and plants that live here!"
+    desktop:
+      vo: "You can click and hold the mouse to move around and explore. Click on things to learn more about animals and plants that liv here!"
+      text: "You can click and hold the mouse to move around and explore. Click on things to learn more about animals and plants that live here!"
+  global:
+    still_there: "You haven't done much recently, are you still there?"
+
+topics:
+  science_tools:
+    summary: "Scientists use all sorts of tools to learn about animals and things. Tap on things to use your magnifying glass and learn more about them."
+  magnifying_glass:
+    summary: " A microscope is another science tool that is more precise and can see even smaller       objects.  If you cannot see a difference with your magnifying lens, then try the more precise microscope so you can magnify smaller objects at three different strengths. A microscope is a more precise tool than a magnifying glass. It can magnify smaller objects and show the differences more clearly."
+    explanation: "A magnifying glass or hand lens is a tool that uses a special convex shaped glass lens to make things look bigger. If it is enlarged you can get a closer look."
+    more: "Try clicking on something to learn more about it!"
+  sun:
+    summary: "That's the sun. Did you know the sun is a star?"
+    explanation: ""
+  vertebrates:
+    summary: ""
+    explanation: ""
+  invertebrates:
+    summary: ""
+    explanation: ""
+  plants:
+    summary: "That looks like a plant!"
+    explanation: "There are many different kinds of plants. Plants use sunlight to make their own food and grow. Some plants even grow flowers."
+    more: "Can you find a flower?"
+words:
+  vertebrate:
+    word: "vertebrate"
+    discover: ""
+    definition: ""
+    find: ""
+
+  invertebrate:
+    word: "invertebrate"
+    discover: ""
+    definition: ""
+    find: ""
+
+  troglodite:
+    word: "troglodite"
+    discover: "You found a troglodyte!"
+    definition: "A troglodyte is something that lives in a cave!"
+    find: "Can you find another troglodyte?"
+
+  herbivore:
+    word: "herbivore"
+    discover: "That's an herbivore!"
+    definition: "Herbivores are animals that only eat plants."
+
+  carnivore:
+    word: "carnivore"
+    discover: "You found a carnivore!"
+    definition: "Carnivores are animals that only eat other animals"
+    find: "Can you find another troglodyte?"
+
+  omnivore:
+    word: "omnivore"
+    discover: "That's an omnivore!"
+    definition: "Omnivores eat all sorts of things, including plants and other animals"
+
+  plant:
+    word: "plant"
+    discover: "That's a plant! Plants are usually green, but may come in all sorts of colors, shapes, and sizes!"
+
+  fungus:
+    word: "fungus"
+    discover: "That's a fungus!"
+    definition: "Mushrooms, molds, and yeast are kinds of fungus. Fungus isn't an animal or a plant!"
+
+  flower:
+    word: "flower"
+    discover: "It looks like you found a flower!"
+    definition: "Some plants make flowers. Flowers attract other animals, which helps to disperse the seeds."
+
+events:
+  critter:
+    hungry:
+      vo: "It looks like this critter is hungry. Using what you've red about different kinds of animals, let's try to feed it something from your backpack!"
+      text: "It looks like this critter is hungry. Using what you've read about different kinds of animals, let's try to feed it something from your backpack!"
+
+responses:
+  feeding:
+    happy: "It really liked that! Let's try and see if any other critters want some of the things you've collected!"
+    oops: "Oops! It looks unhappy... I'm not sure that critter likes that food. Try to feed it something else..."

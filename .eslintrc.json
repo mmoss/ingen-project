@@ -1,0 +1,13 @@
+{
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "rules": {
+      "one-var": 0,
+      "strict": 0
+    },
+    "plugins": [
+      "jsdoc",
+      "react",
+      "smells"
+    ]
+}

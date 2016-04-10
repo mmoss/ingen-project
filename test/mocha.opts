@@ -1,0 +1,7 @@
+--ui bdd
+--harmony
+--compilers js:babel-register
+--require chai
+--require sinon
+--require mocha-clean/brief
+--require mocha-clean/show_node_modules
