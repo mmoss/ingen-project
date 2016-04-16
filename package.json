@@ -1,5 +1,5 @@
 {
-  "name": "ingen-project",
+  "name": "ingen",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -7,7 +7,7 @@
     "jspm": "jspm",
     "mocha": "mocha",
     "postinstall": "jspm install",
-    "clean": "rm -rf assets/audio lib/dependencies.js*",
+    "clean": "rm -rf assets/audio lib/dependencies.js",
     "clobber": "npm run clean && rm -rf node_modules jspm_packages npm-debug.log",
     "lint": "eslint app",
     "voiceover": "babel-node --presets es2015 -- scripts/voiceover",
@@ -15,13 +15,15 @@
     "images": "svgo -f src/images -o assets/images",
     "images:watch": "chokidar 'src/images/**/*.svg' -c 'npm run images'",
     "prebundle": "npm run dependencies",
-    "bundle": "jspm bundle src/main.js - ./lib/dependencies.js ./lib/main.js --minify",
-    "bundle:watch": "chokidar '**/*.js' -c 'npm run bundle'",
-    "dependencies": "jspm bundle 'src/**/*.js - [src/**/*.js]' ./lib/dependencies.js --minify",
+    "bundle": "jspm bundle src/main.js - assets/dependencies.js assets/main.js --minify",
+    "bundle:watch": "chokidar 'src/**/*.js' -c 'npm run bundle'",
+    "dependencies": "jspm bundle 'src/**/*.js - [src/**/*.js]' assets/dependencies.js --minify",
     "dependencies:watch": "chokidar 'src/**/*.js' -c 'npm run build:dependencies --polling'",
+    "fonts": "cp -R src/fonts assets/",
+    "fonts:watch": "chokidar 'src/fonts/*.*' -c 'npm run fonts --polling'",
     "preserve": "npm run dependencies",
     "serve": "http-server . --cors -c-1",
-    "start": "parallelshell 'npm run serve' 'npm run images:watch' 'npm run voiceover:watch' 'npm run dependencies:watch' --watch --verbose",
+    "start": "parallelshell 'npm run serve' 'npm run images:watch' 'npm run fonts:watch' 'npm run voiceover:watch' 'npm run dependencies:watch' 'npm run bundle:watch' --watch --verbose",
     "test": "NODE_ENV=test mocha test/**/*.js",
     "test:coverage": "NODE_ENV=test istanbul cover ./node_modules/.bin/_mocha test/**/*.js",
     "test:watch": "NODE_ENV=test npm run test"
@@ -36,6 +38,7 @@
     "babel-preset-stage-0": "6.5.0",
     "babel-register": "6.7.2",
     "chai": "3.5.0",
+    "chokidar-cli": "1.2.0",
     "esdoc": "0.4.6",
     "esdoc-es7-plugin": "0.0.3",
     "esdoc-plugin-async-to-sync": "0.5.0",
@@ -47,46 +50,45 @@
     "eslint-plugin-mocha": "2.0.0",
     "eslint-plugin-react": "4.3.0",
     "eslint-plugin-smells": "^1.0.1",
+    "http-server": "0.9.0",
     "istanbul": "github:gotwarlost/istanbul#master",
     "jspm": "github:jspm/jspm-cli#0.17",
     "lodash.assign": "4.0.7",
     "mocha": "2.4.5",
     "mocha-clean": "1.0.0",
     "node-fs-extra": "0.8.1",
+    "parallelshell": "2.0.0",
+    "postcss-cli": "2.5.1",
+    "postcss-cssnext": "2.5.2",
+    "postcss-fakeid": "1.0.2",
+    "postcss-fontpath": "0.2.0",
+    "postcss-gradient-transparency-fix": "1.0.2",
     "sinon": "1.17.3",
     "sinon-chai": "2.8.0",
     "svgo": "0.6.4"
   },
   "jspm": {
+    "main": "src/main.js",
     "configFiles": {
       "jspm:browser": "jspm.browser.js",
       "jspm": "jspm.config.js"
     },
-    "configFile": "src/jspm.config.js",
     "dependencies": {
-      "autoprefixer": "npm:autoprefixer@^6.3.6",
+      "alt": "npm:alt@^0.18.4",
+      "alt-utils": "npm:alt-utils@^1.0.0",
       "gsapi": "github:greensock/GreenSock-JS@^1.18.2",
-      "audio": "github:ozsay/plugin-audio@^0.0.3",
-      "fbjs": "npm:fbjs@^0.8.0",
-      "image": "github:systemjs/plugin-image@^0.1.0",
-      "json": "github:systemjs/plugin-json@^0.1.0",
-      "jspm-loader-css": "npm:jspm-loader-css@^1.1.0",
+      "howler": "github:goldfire/howler.js@2.0",
+      "lazyimage": "github:laurentgoudet/plugin-lazyimage@^0.2.0",
       "material-ui": "npm:material-ui@^0.15.0-alpha.2",
-      "postcss-cssnext": "npm:postcss-cssnext@^2.5.2",
-      "raw": "github:matthewbauer/plugin-raw@^1.0.0",
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.9",
       "react-tap-event-plugin": "npm:react-tap-event-plugin@^0.2.0",
-      "text": "github:systemjs/plugin-text@^0.0.7",
       "yaml": "npm:systemjs-plugin-yaml@^0.2.0"
     },
-    "devDependencies": {
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4",
-      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.9"
-    },
+    "devDependencies": {},
     "peerDependencies": {
       "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
       "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
-      "child_process": "github:jspm/nodelibs-child_process@^0.2.0-alpha",
+      "core-js": "npm:core-js@^1.2.0",
       "domain": "github:jspm/nodelibs-domain@^0.2.0-alpha",
       "events": "github:jspm/nodelibs-events@^0.2.0-alpha",
       "fs": "github:jspm/nodelibs-fs@^0.2.0-alpha",
@@ -95,18 +97,23 @@
       "os": "github:jspm/nodelibs-os@^0.2.0-alpha",
       "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
       "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
-      "querystring": "github:jspm/nodelibs-querystring@^0.2.0-alpha",
-      "react": "npm:react@^0.14.8",
-      "react-dom": "npm:react-dom@^0.14.0",
+      "react": "npm:react@^15.0.1",
+      "react-dom": "npm:react-dom@^15.0.0",
       "stream": "github:jspm/nodelibs-stream@^0.2.0-alpha",
       "string_decoder": "github:jspm/nodelibs-string_decoder@^0.2.0-alpha",
-      "tty": "github:jspm/nodelibs-tty@^0.2.0-alpha",
       "url": "github:jspm/nodelibs-url@^0.2.0-alpha",
       "util": "github:jspm/nodelibs-util@^0.2.0-alpha",
       "vm": "github:jspm/nodelibs-vm@^0.2.0-alpha",
       "zlib": "github:jspm/nodelibs-zlib@^0.2.0-alpha"
     },
     "overrides": {
+      "github:goldfire/howler.js@2.0": {
+        "main": "src/howler.core.js",
+        "registry": "jspm",
+        "files": [
+          "src/howler.core.js"
+        ]
+      },
       "github:greensock/GreenSock-JS@1.18.2": {
         "directories": {
           "lib": "src/uncompressed"
@@ -131,52 +138,10 @@
       "npm:esprima@2.7.2": {
         "jspmNodeConversion": false
       },
-      "npm:fbjs@0.6.1": {
-        "dependencies": {}
-      },
       "npm:inherits@2.0.1": {
         "ignore": [
           "test.js"
         ]
-      },
-      "npm:react@0.14.8": {
-        "dependencies": {
-          "fbjs": "^0.6.1"
-        },
-        "format": "cjs",
-        "meta": {
-          "*": {
-            "globals": {
-              "process": "process"
-            }
-          }
-        },
-        "map": {
-          "fbjs/lib/ExecutionEnvironment.js": {
-            "production": "@empty"
-          },
-          "./lib/ReactDefaultPerf.js": {
-            "production": "@empty"
-          },
-          "./lib/ReactTestUtils.js": {
-            "production": "@empty"
-          }
-        }
-      },
-      "npm:readable-stream@1.0.34": {
-        "map": {
-          "stream": "stream-browserify/index"
-        },
-        "systemjs": {
-          "main": "readable.js"
-        },
-        "dependencies": {
-          "core-util-is": "~1.0.0",
-          "isarray": "0.0.1",
-          "string_decoder": "~0.10.0",
-          "inherits": "~2.0.1",
-          "stream-browserify": "~1.0.0"
-        }
       }
     }
   }

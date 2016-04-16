@@ -1,0 +1,2 @@
+System.registerDynamic("npm:systemjs-plugin-babel@0.0.9.json",[],!1,function(){return{main:"plugin-babel.js",map:{"systemjs-babel-build":{browser:"./systemjs-babel-browser.js","default":"./systemjs-babel-browser.js"}},meta:{"./plugin-babel.js":{format:"cjs"}}}});
+//# sourceMappingURL=dependencies.js.map
